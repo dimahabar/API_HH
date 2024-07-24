@@ -1,0 +1,6 @@
+# Poetry specific files
+poetry.lock
+
+# Virtual environment
+/env/
+.venv/

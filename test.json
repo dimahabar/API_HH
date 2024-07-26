@@ -1,0 +1,20 @@
+[
+    {
+        "id": "1",
+        "name": "Python Developer",
+        "url": "http://example.com/1",
+        "currency": "RUR",
+        "description": "Python Test description",
+        "salary_from": 100000,
+        "salary_to": 150000
+    },
+    {
+        "id": "2",
+        "name": "Java Developer",
+        "url": "http://example.com/2",
+        "currency": "RUR",
+        "description": "Java Test description",
+        "salary_from": 120000,
+        "salary_to": 170000
+    }
+]

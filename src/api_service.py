@@ -1,3 +1,5 @@
+import json
+import sys
 from abc import ABC, abstractmethod
 from typing import List
 import requests
@@ -21,11 +23,12 @@ class HhAPI(API):
     """
     BASE_URL = "https://api.hh.ru/vacancies"
 
+    def __init__(self):
+        self.all_vacancy = None
+
     def get_vacancies(self, search_query: str) -> List[dict]:
-        """Отправляет GET-запрос к API hh.ru для получения списка вакансий,
-        соответствующих заданному критерию поиска
-        - 'only_with_salary': True - только с указанеим зарплат
-        - "area": 1 - регион поиска ваксний Москва
+        """
+        Отправляет GET-запрос к API hh.ru для получения списка вакансий
         """
         params = {
             "text": search_query,
@@ -33,6 +36,22 @@ class HhAPI(API):
             "per_page": 100,
             'only_with_salary': True,
         }
-        response = requests.get(url=self.BASE_URL, params=params)
-        return response.json()['items']
 
+        try:
+            response = requests.get(url=self.BASE_URL, params=params)
+            r = response.status_code == 200
+
+        except requests.exceptions.ConnectionError:
+            print()
+            sys.exit(f"Ошибка соединения")
+
+        else:
+            self.all_vacancy = json.loads(response.text)['items']
+
+        if self.all_vacancy is None or len(self.all_vacancy) == 0:
+            sys.exit("Некорректный поисковой запрос")
+
+        if len(params['text']) < 1:
+            sys.exit("Поисковой запрос не введен")
+
+        return self.all_vacancy

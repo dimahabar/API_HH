@@ -1,9 +1,10 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import List, Optional
 
 
+
 @dataclass
-class Vacancy:
+class Vacancy():
     """
     Класс Vacancy представляет собой модель данных для описания вакансий на рынке труда.
 
@@ -23,6 +24,35 @@ class Vacancy:
     description: str
     salary_from: Optional[int] = None
     salary_to: Optional[int] = None
+
+    def __init__(self, id, name, url, currency, description, salary_from, salary_to):
+        self.__id = id
+        self.__name = name
+        self.__url = url
+        self.__currency = currency
+        self.__description = description
+        self.salary_from = salary_from
+        self.salary_to = salary_to
+
+    @property
+    def id(self):
+        return self.__id
+
+    @property
+    def name(self):
+        return self.__name
+
+    @property
+    def url(self):
+        return self.__url
+
+    @property
+    def currency(self):
+        return self.__currency
+
+    @property
+    def description(self):
+        return self.__description
 
     def __lt__(self, other: 'Vacancy') -> bool:
         """Метод для сравнения зарплат"""

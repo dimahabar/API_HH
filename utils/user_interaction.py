@@ -1,3 +1,4 @@
+from pydantic import validator
 from src.api_service import HhAPI
 from src.vacancy import Vacancy
 from src.json_storage import JSONVacancyStorage
@@ -44,7 +45,7 @@ def user_interaction() -> None:
             print('\nПока!')
             break
         else:
-            print('Неверно введено значение. Попрбуйте еще раз\n')
+            print('Неверно введено значение. Попрбуйте еще раз')
 
 
 def menu_top_n_vac(json_storage: JSONVacancyStorage) -> None:
